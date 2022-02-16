@@ -1,0 +1,17 @@
+- hosts: webservers
+  tasks:
+  - name: Install lighttpd
+    package:
+      name: lighttpd
+      state: present
+  - name: Start service lighttpd, if not started
+    ansible.builtin.service:
+      name: lighttpd
+      state: started
+
+- hosts: dbservers
+  tasks:
+  - name: Install redis
+    package:
+      name: redis
+      state: present

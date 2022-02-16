@@ -1,0 +1,23 @@
+version: "3.8"
+services:
+  ansible:
+    hostname: ansible
+    tty: true
+    volumes:
+    - ./shared-folder:/shared-folder
+    build:
+      context: .
+      dockerfile: Dockerfile.ansible
+  web:
+    hostname: web
+    ports:
+    - "999:999"
+    build:
+      context: .
+      dockerfile: Dockerfile.alpine
+  db:
+    hostname: db
+    build:
+      context: .
+      dockerfile: Dockerfile.alpine
+      

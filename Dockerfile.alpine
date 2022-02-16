@@ -1,0 +1,10 @@
+FROM alpine:3.15
+RUN apk add openrc openssh-server python3 openssh-sftp-server
+COPY id_rsa.pub /root/.ssh/authorized_keys
+RUN chmod 400 /root/.ssh/authorized_keys
+COPY inittab /etc/inittab
+COPY sshd_config /etc/ssh/sshd_config
+RUN rc-update add sshd default
+RUN passwd -u root
+
+CMD ["/sbin/init"]
